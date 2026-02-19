@@ -1,0 +1,80 @@
+[
+  {
+    "id": "test_001",
+    "error_trace": "Traceback (most recent call last):\n  File \"app.py\", line 23, in handle_request\n    user_id = request.user.id\nAttributeError: 'NoneType' object has no attribute 'id'",
+    "stored_fix": "Added 'if request.user is None: return 401' before accessing user.id",
+    "fix_keywords": ["None", "null check", "if request.user", "401"]
+  },
+  {
+    "id": "test_002",
+    "error_trace": "ModuleNotFoundError: No module named 'pandas'",
+    "stored_fix": "Run pip install pandas in the virtual environment",
+    "fix_keywords": ["pip install", "virtual environment", "venv"]
+  },
+  {
+    "id": "test_003",
+    "error_trace": "TypeError: cannot read property 'id' of undefined",
+    "stored_fix": "Added optional chaining: user?.id or default value",
+    "fix_keywords": ["optional chaining", "user?.id", "default"]
+  },
+  {
+    "id": "test_004",
+    "error_trace": "KeyError: 'username'\n  File \"auth.py\", line 12, in get_user\n    return data['username']",
+    "stored_fix": "Use data.get('username', '') or validate key before access",
+    "fix_keywords": [".get(", "default", "validate"]
+  },
+  {
+    "id": "test_005",
+    "error_trace": "ImportError: cannot import name 'foo' from 'bar'",
+    "stored_fix": "Fixed circular import by moving shared code to a separate module",
+    "fix_keywords": ["circular import", "separate module", "move"]
+  },
+  {
+  "id": "test_006",
+  "error_trace": "AttributeError: 'NoneType' object has no attribute 'name'",
+  "stored_fix": "CAUSE: variable was None | FIX: add null check before accessing attribute",
+  "fix_keywords": ["null", "check", "attribute"]
+  },
+  {
+  "id": "test_007",
+  "error_trace":"TypeError: unsupported operand type(s) for +: 'int' and 'str'",
+  "stored_fix":"CAUSE: mixing int and string | FIX: convert one type before addition",
+  "fix_keywords":"fix_keywords": ["type conversion", "int()", "str()"]
+  },
+  {
+  "id": "test_008",
+  "error_trace": "IndentationError: unexpected indent",
+  "stored_fix": "CAUSE: incorrect indentation | FIX: remove extra spaces or align block properly",
+  "fix_keywords": ["indent", "spaces", "alignment"]
+  },
+  {
+   "id": "test_009",
+  "error_trace": "IndexError: list index out of range",
+  "stored_fix": "CAUSE: accessing index beyond list size | FIX: check len(list) before indexing",
+  "fix_keywords": ["len()", "index", "bounds"]
+  },
+  {
+  "id": "test_010",
+  "error_trace": "ModuleNotFoundError: No module named 'fake_module_that_doesnt_exist'",
+  "stored_fix": "CAUSE: missing dependency | FIX: install module using pip",
+  "fix_keywords": ["pip install", "dependency", "module"]
+  },
+  {
+  "id": "test_011",
+  "error_trace": "ZeroDivisionError: division by zero",
+  "stored_fix": "CAUSE: dividing by zero | FIX: check denominator before division",
+  "fix_keywords": ["zero check", "division", "if"]
+  },
+  {
+  "id": "test_012",
+  "error_trace": "ValueError: invalid literal for int() with base 10: 'abc'",
+  "stored_fix": "CAUSE: converting non-numeric string to int | FIX: validate input before casting",
+  "fix_keywords": ["int()", "validation", "try except"]
+  },
+  {
+  "id": "test_013",
+  "error_trace": "IndentationError: expected an indented block after 'with' statement",
+  "stored_fix": "CAUSE: missing indentation under with block | FIX: indent inner code",
+  "fix_keywords": ["indent", "with block", "spaces"]
+  }
+]

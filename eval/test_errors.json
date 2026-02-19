@@ -1,0 +1,182 @@
+[
+  {
+    "id": "test_001",
+    "error_trace": "Traceback (most recent call last):\n  File \"app.py\", line 23, in handle_request\n    user_id = request.user.id\nAttributeError: 'NoneType' object has no attribute 'id'",
+    "stored_fix": "Added 'if request.user is None: return 401' before accessing user.id",
+    "fix_keywords": ["None", "null check", "if request.user", "401"]
+  },
+  {
+    "id": "test_002",
+    "error_trace": "ModuleNotFoundError: No module named 'pandas'",
+    "stored_fix": "Run pip install pandas in the virtual environment",
+    "fix_keywords": ["pip install", "virtual environment", "venv"]
+  },
+  {
+    "id": "test_003",
+    "error_trace": "TypeError: cannot read property 'id' of undefined",
+    "stored_fix": "Added optional chaining: user?.id or default value",
+    "fix_keywords": ["optional chaining", "user?.id", "default"]
+  },
+  {
+    "id": "test_004",
+    "error_trace": "KeyError: 'username'\n  File \"auth.py\", line 12, in get_user\n    return data['username']",
+    "stored_fix": "Use data.get('username', '') or validate key before access",
+    "fix_keywords": [".get(", "default", "validate"]
+  },
+  {
+    "id": "test_005",
+    "error_trace": "ImportError: cannot import name 'foo' from 'bar'",
+    "stored_fix": "Fixed circular import by moving shared code to a separate module",
+    "fix_keywords": ["circular import", "separate module", "move"]
+  },
+  {
+    "id": "test_006",
+    "error_trace": "AttributeError: 'NoneType' object has no attribute 'name'",
+    "stored_fix": "CAUSE: variable was None | FIX: add null check before accessing attribute",
+    "fix_keywords": ["null", "check", "attribute"]
+  },
+  {
+    "id": "test_007",
+    "error_trace": "TypeError: unsupported operand type(s) for +: 'int' and 'str'",
+    "stored_fix": "CAUSE: mixing int and string | FIX: convert one type before addition",
+    "fix_keywords": ["type conversion", "int()", "str()"]
+  },
+  {
+    "id": "test_008",
+    "error_trace": "IndentationError: unexpected indent",
+    "stored_fix": "CAUSE: incorrect indentation | FIX: remove extra spaces or align block properly",
+    "fix_keywords": ["indent", "spaces", "alignment"]
+  },
+  {
+    "id": "test_009",
+    "error_trace": "IndexError: list index out of range",
+    "stored_fix": "CAUSE: accessing index beyond list size | FIX: check len(list) before indexing",
+    "fix_keywords": ["len()", "index", "bounds"]
+  },
+  {
+    "id": "test_010",
+    "error_trace": "ModuleNotFoundError: No module named 'fake_module_that_doesnt_exist'",
+    "stored_fix": "CAUSE: missing dependency | FIX: install module using pip",
+    "fix_keywords": ["pip install", "dependency", "module"]
+  },
+  {
+    "id": "test_011",
+    "error_trace": "ZeroDivisionError: division by zero",
+    "stored_fix": "CAUSE: dividing by zero | FIX: check denominator before division",
+    "fix_keywords": ["zero check", "division", "if"]
+  },
+  {
+    "id": "test_012",
+    "error_trace": "ValueError: invalid literal for int() with base 10: 'abc'",
+    "stored_fix": "CAUSE: converting non-numeric string to int | FIX: validate input before casting",
+    "fix_keywords": ["int()", "validation", "try except"]
+  },
+  {
+    "id": "test_013",
+    "error_trace": "IndentationError: expected an indented block after 'with' statement",
+    "stored_fix": "CAUSE: missing indentation under with block | FIX: indent inner code",
+    "fix_keywords": ["indent", "with block", "spaces"]
+  },
+  {
+    "id": "test_014",
+    "error_trace": "FileNotFoundError: [Errno 2] No such file or directory: 'config.json'",
+    "stored_fix": "CAUSE: file doesn't exist | FIX: check with os.path.exists() or create default",
+    "fix_keywords": ["file exists", "os.path", "default file"]
+  },
+  {
+    "id": "test_015",
+    "error_trace": "NameError: name 'response' is not defined\n  File \"api.py\", line 45\n    return response.json()",
+    "stored_fix": "CAUSE: variable used before assignment | FIX: initialize variable or check scope",
+    "fix_keywords": ["initialize", "scope", "define"]
+  },
+  {
+    "id": "test_016",
+    "error_trace": "RecursionError: maximum recursion depth exceeded\n  File \"traverse.py\", line 8, in walk\n    return walk(node.next)",
+    "stored_fix": "CAUSE: infinite recursion | FIX: add base case to stop recursion",
+    "fix_keywords": ["base case", "recursion", "termination"]
+  },
+  {
+    "id": "test_017",
+    "error_trace": "ConnectionRefusedError: [Errno 111] Connection refused\n  File \"client.py\", line 22\n    sock.connect(('localhost', 8080))",
+    "stored_fix": "CAUSE: server not running | FIX: start server or check port/firewall",
+    "fix_keywords": ["server", "port", "connection"]
+  },
+  {
+    "id": "test_018",
+    "error_trace": "PermissionError: [Errno 13] Permission denied: '/var/log/app.log'",
+    "stored_fix": "CAUSE: insufficient permissions | FIX: use user directory or run with sudo",
+    "fix_keywords": ["permissions", "sudo", "user directory"]
+  },
+  {
+    "id": "test_019",
+    "error_trace": "TimeoutError: [Errno 110] Connection timed out",
+    "stored_fix": "CAUSE: network timeout | FIX: increase timeout or add retry logic",
+    "fix_keywords": ["timeout", "retry", "network"]
+  },
+  {
+    "id": "test_020",
+    "error_trace": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+    "stored_fix": "CAUSE: invalid JSON response | FIX: validate response before parsing",
+    "fix_keywords": ["JSON", "validate", "try except"]
+  },
+  {
+    "id": "test_021",
+    "error_trace": "UnboundLocalError: local variable 'count' referenced before assignment\n  File \"stats.py\", line 15\n    count += 1",
+    "stored_fix": "CAUSE: modifying variable before declaring local | FIX: initialize or use global/nonlocal",
+    "fix_keywords": ["initialize", "global", "nonlocal"]
+  },
+  {
+    "id": "test_022",
+    "error_trace": "StopIteration\n  File \"generator.py\", line 18\n    value = next(iterator)",
+    "stored_fix": "CAUSE: iterator exhausted | FIX: use for loop or try/except StopIteration",
+    "fix_keywords": ["iterator", "for loop", "StopIteration"]
+  },
+  {
+    "id": "test_023",
+    "error_trace": "UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in position 0",
+    "stored_fix": "CAUSE: wrong encoding | FIX: specify correct encoding like latin-1 or ignore errors",
+    "fix_keywords": ["encoding", "latin-1", "errors='ignore'"]
+  },
+  {
+    "id": "test_024",
+    "error_trace": "MemoryError\n  File \"process.py\", line 67\n    big_list = [0] * (10**10)",
+    "stored_fix": "CAUSE: allocating too much memory | FIX: use generators or process in chunks",
+    "fix_keywords": ["generator", "chunks", "memory"]
+  },
+  {
+    "id": "test_025",
+    "error_trace": "SyntaxError: invalid syntax\n  File \"script.py\", line 5\n    if x = 5:",
+    "stored_fix": "CAUSE: assignment in condition | FIX: use == for comparison not =",
+    "fix_keywords": ["==", "comparison", "syntax"]
+  },
+  {
+    "id": "test_026",
+    "error_trace": "OSError: [Errno 28] No space left on device",
+    "stored_fix": "CAUSE: disk full | FIX: free up space or change output directory",
+    "fix_keywords": ["disk space", "cleanup", "directory"]
+  },
+  {
+    "id": "test_027",
+    "error_trace": "AssertionError\n  File \"test.py\", line 33\n    assert user.is_admin == True",
+    "stored_fix": "CAUSE: assertion failed | FIX: check logic or remove assertion",
+    "fix_keywords": ["assert", "condition", "test"]
+  },
+  {
+    "id": "test_028",
+    "error_trace": "RuntimeWarning: divide by zero encountered in true_divide\n  File \"compute.py\", line 89\n    result = array / 0",
+    "stored_fix": "CAUSE: numpy divide by zero | FIX: use np.where or mask zeros before division",
+    "fix_keywords": ["np.where", "mask", "zero"]
+  },
+  {
+    "id": "test_029",
+    "error_trace": "SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed",
+    "stored_fix": "CAUSE: SSL certificate issue | FIX: update certifi or use verify=False (dev only)",
+    "fix_keywords": ["SSL", "certifi", "verify"]
+  },
+  {
+    "id": "test_030",
+    "error_trace": "AttributeError: module 'collections' has no attribute 'Iterable'\n  File \"utils.py\", line 8\n    isinstance(obj, collections.Iterable)",
+    "stored_fix": "CAUSE: deprecated import | FIX: use collections.abc.Iterable in Python 3.10+",
+    "fix_keywords": ["collections.abc", "deprecated", "Python 3.10"]
+  }
+]
