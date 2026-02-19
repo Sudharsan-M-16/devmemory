@@ -1,87 +1,130 @@
 # DevMemory
 
-> An AI that remembers how *you* fix bugs — not how the internet does.
+> A local-first AI system that builds a personal memory of your debugging history and retrieves how *you* fixed similar errors in the past.
 
-## The problem
+DevMemory observes errors, embeds them into a vector database, and performs semantic retrieval over your own debugging history before asking an LLM. Instead of generic internet advice, it surfaces fixes that **you personally used before**.
 
-You hit an error. You Google it, paste it into ChatGPT, get a generic answer. DevMemory does something different: it builds a **personal memory** of every error you've seen and how you fixed it. When you hit a new error, it searches that history first and says: *"You hit something like this before; you fixed it by doing X."*
+---
 
-## What it does
+## Why This Exists
 
-- **Learn**: Store errors and how you fixed them (from terminal or manually).
-- **Query**: Paste an error → semantic search over your history → RAG-backed suggestion from Claude.
-- **Eval**: Leave-one-out benchmark to measure retrieval precision.
+Most AI coding tools treat you like a stranger every time.
 
-## How it works
+They know the internet.  
+They don’t know *you*.
 
-1. **Semantic fingerprint** — Parser extracts error type, message, and top stack frames (skips stdlib/site-packages).
-2. **Embeddings** — `sentence-transformers/all-MiniLM-L6-v2` turns text into vectors (meaning, not just keywords).
-3. **Vector store** — ChromaDB (local, cosine similarity) stores and retrieves similar past errors.
-4. **RAG** — Top similar past errors + fixes are passed to Claude to generate a personalized suggestion.
+DevMemory fills that gap by building a persistent, private memory of:
 
-## Stack
+- Errors you encountered  
+- How you fixed them  
+- When and where they occurred  
 
-- **Embeddings**: sentence-transformers/all-MiniLM-L6-v2  
-- **Vector DB**: ChromaDB (local, persistent)  
-- **LLM**: Claude API (claude-sonnet)  
-- **Language**: Python 3.9+
+When a new error appears, DevMemory retrieves semantically similar past errors and uses them as context for a personalized suggestion.
 
-## Quick start
+---
+
+## Key Capabilities
+
+- Semantic parsing of Python tracebacks into compact fingerprints  
+- Vector-based retrieval using sentence embeddings  
+- Retrieval-Augmented Generation (RAG) over personal history  
+- Leave-one-out evaluation harness with Precision@k metrics  
+- CLI + FastAPI backend + React dashboard  
+- Fully local-first (no code sent to external services by default)
+
+---
+
+## Architecture
+
+Terminal / UI
+|
+v
+Parser (semantic fingerprint)
+|
+v
+Embedding Model (MiniLM)
+|
+v
+ChromaDB (local vector store)
+|
+v
+Top-k Similar Errors + Fixes
+|
+v
+LLM (RAG Prompt)
+|
+v
+Personalized Fix Suggestion
+
+
+---
+
+## Tech Stack
+
+- Python 3.10+  
+- sentence-transformers (all-MiniLM-L6-v2)  
+- ChromaDB (persistent local vector DB)  
+- FastAPI (backend)  
+- React + Vite (frontend dashboard)  
+- Ollama / Claude (LLM backend)
+
+---
+
+## Example Workflow
+
+1. Paste error or capture it from terminal  
+2. DevMemory parses and embeds it  
+3. Retrieves similar past errors  
+4. Generates suggestion grounded in your history  
+5. You optionally store the new fix
+
+---
+
+## CLI Usage
+
+Create environment:
 
 ```bash
 python -m venv venv
-source venv/bin/activate   # or venv\Scripts\activate on Windows
+source venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env
-# Edit .env and set ANTHROPIC_API_KEY (get one at console.anthropic.com)
-```
+Query an error:
 
-**Query an error:**
-
-```bash
 python -m cli.main query "AttributeError: 'NoneType' object has no attribute 'id'"
-```
+Teach a fix:
 
-**Teach a fix:**
-
-```bash
 python -m cli.main learn "ModuleNotFoundError: No module named 'pandas'" "pip install pandas"
-```
+Evaluation
+DevMemory includes a leave-one-out retrieval benchmark on labeled error/fix pairs.
 
-**Run benchmark (leave-one-out on eval set):**
+Run:
 
-```bash
 python -m eval.benchmark
-```
+Current results (30 test cases):
 
-## Project layout
+Precision@1 ≈ 92.6%
 
-```
+Precision@3 ≈ 92.6%
+
+No-match cases: 0
+
+These numbers measure retrieval quality, not LLM correctness.
+
+Project Structure
 devmemory/
 ├── core/
-│   ├── parser.py   # Semantic fingerprint from tracebacks
-│   ├── memory.py   # ChromaDB + embeddings (store/search)
-│   └── llm.py      # Claude RAG prompt
+│   ├── parser.py
+│   ├── memory.py
+│   └── llm.py
 ├── cli/
-│   └── main.py     # query / learn
+│   └── main.py
+├── backend/
+│   └── main.py
+├── ui/
+│   └── (React frontend)
 ├── eval/
-│   ├── test_errors.json
-│   └── benchmark.py
-├── data/.chromadb  # Local DB (created on first run)
+│   ├── benchmark.py
+│   └── test_errors.json
+├── data/
 ├── requirements.txt
-└── .env
-```
-
-## Benchmark
-
-After adding more cases to `eval/test_errors.json`, run:
-
-```bash
-python -m eval.benchmark
-```
-
-Report Precision@1 and Precision@3 in your README. Methodology: leave-one-out evaluation on manually labeled error/fix pairs.
-
-## License
-
-MIT
+└── README.md
